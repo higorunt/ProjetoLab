@@ -1,0 +1,26 @@
+module ContadorCentesimosSegundo(
+  input wire clk,       // Clock de entrada
+  input wire reset,     // Sinal de reset
+  output reg [3:0] saida_display,  // Saída para o display
+  output wire proximo_estado  // Saída para o próximo estado (clock para os "segundos")
+);
+
+reg [3:0] count;
+
+always @(posedge clk or posedge reset) begin
+  if (reset) begin
+    count <= 4'b0000;  // Inicializa o contador em zero durante o reset
+  end else begin
+    // Lógica para incrementar o contador até 10
+    if (count == 4'b1001) begin
+      count <= 4'b0000;  // Reinicia o contador quando chega a 10
+    end else begin
+      count <= count + 1;  // Incrementa o contador
+    end
+  end
+end
+
+assign saida_display = count;  // Saída para o display
+assign proximo_estado = (count == 4'b1001);  // Gera um pulso no último estado (quando o contador atinge 10)
+
+endmodule

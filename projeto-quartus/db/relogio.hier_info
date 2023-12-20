@@ -1,0 +1,64 @@
+|relogio
+nextClock <= ContadorDezenasSegundos:inst8.proximo_estado_clk
+Clock => ContadorCentesimosSegundo:inst.clk
+Reset => ContadorCentesimosSegundo:inst.reset
+Reset => ContadorUnidadesSegundo:inst7.reset
+Reset => ContadorDezenasSegundos:inst8.reset
+centesimos[0] <= ContadorCentesimosSegundo:inst.saida_display[0]
+centesimos[1] <= ContadorCentesimosSegundo:inst.saida_display[1]
+centesimos[2] <= ContadorCentesimosSegundo:inst.saida_display[2]
+centesimos[3] <= ContadorCentesimosSegundo:inst.saida_display[3]
+dezenas[0] <= ContadorDezenasSegundos:inst8.saida_display[0]
+dezenas[1] <= ContadorDezenasSegundos:inst8.saida_display[1]
+dezenas[2] <= ContadorDezenasSegundos:inst8.saida_display[2]
+unidades[0] <= ContadorUnidadesSegundo:inst7.saida_display[0]
+unidades[1] <= ContadorUnidadesSegundo:inst7.saida_display[1]
+unidades[2] <= ContadorUnidadesSegundo:inst7.saida_display[2]
+unidades[3] <= ContadorUnidadesSegundo:inst7.saida_display[3]
+
+
+|relogio|ContadorDezenasSegundos:inst8
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+reset => count[0].ACLR
+reset => count[1].ACLR
+reset => count[2].ACLR
+saida_display[0] <= count[0].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[1] <= count[1].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[2] <= count[2].DB_MAX_OUTPUT_PORT_TYPE
+proximo_estado_clk <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|ContadorUnidadesSegundo:inst7
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+reset => count[0].ACLR
+reset => count[1].ACLR
+reset => count[2].ACLR
+reset => count[3].ACLR
+saida_display[0] <= count[0].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[1] <= count[1].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[2] <= count[2].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[3] <= count[3].DB_MAX_OUTPUT_PORT_TYPE
+proximo_estado_clk <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|relogio|ContadorCentesimosSegundo:inst
+clk => count[0].CLK
+clk => count[1].CLK
+clk => count[2].CLK
+clk => count[3].CLK
+reset => count[0].ACLR
+reset => count[1].ACLR
+reset => count[2].ACLR
+reset => count[3].ACLR
+saida_display[0] <= count[0].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[1] <= count[1].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[2] <= count[2].DB_MAX_OUTPUT_PORT_TYPE
+saida_display[3] <= count[3].DB_MAX_OUTPUT_PORT_TYPE
+proximo_estado_clk <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+
+

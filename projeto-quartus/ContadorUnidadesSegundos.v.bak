@@ -1,0 +1,32 @@
+module ContadorUnidadesSegundos (
+    input wire clk,      // Entrada de clock
+    input wire reset,    // Entrada de reset
+    output reg [3:0] segundos_display1,   // Saída para o dígito das unidades (0 a 9)
+    output reg sec_tick_unidades  // Saída para o pulso de segundos quando o contador de unidades atinge 10
+);
+
+reg [3:0] contador_unidades;  // Registrador interno para armazenar o estado do contador de unidades
+reg [3:0] proximo_estado_unidades;  // Registrador interno para o próximo estado do contador de unidades
+
+always @(posedge clk or posedge reset) begin
+    if (reset) begin
+        contador_unidades <= 4'b0000;
+        sec_tick_unidades <= 0;
+    end else begin
+        proximo_estado_unidades <= contador_unidades + 1;
+
+        if (contador_unidades == 4'b1001) begin
+            contador_unidades <= 4'b0000;
+            sec_tick_unidades <= 1;
+        end else begin
+            contador_unidades <= proximo_estado_unidades;
+            sec_tick_unidades <= 0;
+        end
+    end
+end
+
+always @* begin
+    segundos_display1 = contador_unidades;  // Dígito das unidades
+end
+
+endmodule
